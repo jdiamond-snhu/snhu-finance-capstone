@@ -123,7 +123,7 @@ with m4:
 st.write("") 
 
 # Display Chart and Weights Table side-by-side
-chart_col, table_col = st.columns()
+chart_col, table_col = st.columns(2)
 
 with chart_col:
     st.subheader("🔮 30-Year Portfolio Wealth Projection Cone")
