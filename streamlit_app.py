@@ -19,20 +19,48 @@ initial_investment = st.sidebar.number_input("Initial Investment ($)", value=100
 time_horizon = st.sidebar.slider("Years in Retirement", min_value=5, max_value=50, value=30)
 inflation_rate = st.sidebar.slider("Annual Inflation Rate", min_value=0.0, max_value=0.15, value=0.03, step=0.01)
 
+# NEW: Dynamic Ticker Input Box in the Sidebar
+st.sidebar.subheader("📈 Asset Selection")
+ticker_input = st.sidebar.text_input("Enter Tickers (comma separated)", value="SPY, BND, QQQ, GLD")
+
+# Clean up the user input text into a neat Python list of uppercase tickers
+assets = [t.strip().upper() for t in ticker_input.split(",") if t.strip()]
+
 # Add a visual divider line
 st.divider()
 
 # =============================================================================
 # CORE MATHEMATICAL ENGINE
 # =============================================================================
-assets = ['SPY', 'BND', 'QQQ', 'GLD']
+# Guard rail: Require at least 2 tickers to optimize a portfolio
+if len(assets) < 2:
+    st.warning("⚠️ Please enter at least 2 asset tickers to run an optimization calculation.")
+    st.stop()
 
-# Cache the data download so the webpage loads blazing fast for users
+# Cache the data download based on the tickers the user types
 @st.cache_data
-def load_market_data():
-    return yf.download(assets, start="2021-01-01", end="2026-06-01", auto_adjust=False)['Adj Close']
+def load_market_data(assets_list):
+    return yf.download(assets_list, start="2021-01-01", end="2026-06-01", auto_adjust=False)['Adj Close']
 
-data = load_market_data()
+# Try downloading the dynamic tickers with error handling
+try:
+    data = load_market_data(assets)
+    
+    # Check if any tickers completely failed to download columns
+    if isinstance(data, pd.Series) or data.empty:
+        st.error("❌ Failed to pull ticker data. Please double-check your ticker symbols.")
+        st.stop()
+        
+    missing_tickers = [a for a in assets if a not in data.columns]
+    if missing_tickers:
+        st.error(f"❌ Could not find valid market data for: {', '.join(missing_tickers)}. Please remove or fix them.")
+        st.stop()
+
+except Exception as e:
+    st.error("❌ Market data retrieval error. Please check your ticker spelling.")
+    st.stop()
+
+# Math setup using the dynamic data
 returns = data.pct_change().dropna()
 mean_returns = returns.mean() * 252  
 cov_matrix = returns.cov() * 252    
@@ -57,7 +85,7 @@ portfolio_return, portfolio_volatility = portfolio_performance(optimal_weights, 
 
 # Run Monte Carlo Model based on slider numbers
 rrr = ((1 + portfolio_return) / (1 + inflation_rate)) - 1
-num_simulations = 5000  # Kept at 5k for swift web calculation speed
+num_simulations = 5000  
 np.random.seed(42)
 sim_results = np.zeros((time_horizon + 1, num_simulations))
 sim_results[0] = initial_investment
@@ -92,10 +120,10 @@ with m3:
 with m4:
     st.metric(label="Worst-Case Systemic Crash", value=f"{max_drawdown_overall*100:.1f}%")
 
-st.write("") # Whitespace spacing
+st.write("") 
 
 # Display Chart and Weights Table side-by-side
-chart_col, table_col = st.columns([2, 1])
+chart_col, table_col = st.columns()
 
 with chart_col:
     st.subheader("🔮 30-Year Portfolio Wealth Projection Cone")
@@ -103,7 +131,7 @@ with chart_col:
     ax.plot(years, p50, color='#1f77b4', linewidth=2.5, label='Median Outcome (Real Purchasing Power)')
     ax.fill_between(years, p10, p90, color='#1f77b4', alpha=0.15, label='80% Confidence Interval Boundaries')
     ax.set_xlabel('Years in Retirement')
-    ax.set_ylabel('Portfolio Balance (Real Purchasing Power USD)')
+    ax.set_ylabel('Portfolio Value (Real Purchasing Power USD)')
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f"${x:,.0f}"))
     ax.grid(True, linestyle='--', alpha=0.4)
     ax.legend(loc='upper left')
@@ -112,8 +140,11 @@ with chart_col:
 with table_col:
     st.subheader("🎯 Mathematically Optimal Weights")
     st.write("Calculated utilizing MPT historical covariance matching.")
+    
+    # Dynamically match whatever list order Pandas used to download the assets
     weight_df = pd.DataFrame({
-        'Asset Ticker': assets, 
+        'Asset Ticker': list(data.columns), 
         'Calculated Allocation Target': [f"{w*100:.2f}%" for w in optimal_weights]
     })
     st.dataframe(weight_df, hide_index=True, use_container_width=True)
+
