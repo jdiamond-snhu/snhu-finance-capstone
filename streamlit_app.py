@@ -116,4 +116,4 @@ with table_col:
         'Asset Ticker': assets, 
         'Calculated Allocation Target': [f"{w*100:.2f}%" for w in optimal_weights]
     })
-    st.data_frame(weight_df, hide_index=True, use_container_width=True)
+    st.dataframe(weight_df, hide_index=True, use_container_width=True)
