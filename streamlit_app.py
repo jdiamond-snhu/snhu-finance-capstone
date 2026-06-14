@@ -18,7 +18,7 @@ st.caption("⚠️ **Disclaimer:** This quantitative model relies strictly on hi
 st.sidebar.header("⚙️ Client Simulation Parameters")
 initial_investment = st.sidebar.number_input("Initial Investment ($)", value=100000, step=5000)
 time_horizon = st.sidebar.slider("Investment Time Horizon (Years)", min_value=5, max_value=50, value=30)
-inflation_rate = st.sidebar.slider("Annual Inflation Rate %", min_value=0.0, max_value=.15, value=.03, step=.01)
+inflation_rate = st.sidebar.slider("Annual Inflation Rate %", min_value=0.0, max_value=15.0, value=3.0, step=0.5)
 
 # NEW: Dynamic Ticker Input Box in the Sidebar
 st.sidebar.subheader("📈 Asset Selection")
