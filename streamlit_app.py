@@ -12,7 +12,7 @@ st.set_page_config(page_title="Portfolio Optimizer", layout="wide")
 
 st.title("📊 Quantitative Portfolio Optimization Engine")
 st.write("A predictive risk simulator factoring inflation and asset covariance for client capstone models.")
-st.caption("⚠️ **Disclaimer:** This quantitative model relies strictly on historical data and does not account for future catalysts, geopolitical/macroeconomic shifts, changes in market trends, or other such factors.")
+st.caption("⚠️ **Disclaimer:** This quantitative model relies strictly on historical data and does not account for future catalysts, macroeconomic shifts, changes in market trends, or other such factors.")
 
 # Create a clean sidebar for user interactive sliders
 st.sidebar.header("⚙️ Client Simulation Parameters")
@@ -127,11 +127,11 @@ st.write("")
 chart_col, table_col = st.columns(2)
 
 with chart_col:
-    st.subheader("🔮 30-Year Portfolio Wealth Projection Cone")
+    st.subheader("🔮 Portfolio Wealth Projection Cone")
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(years, p50, color='#1f77b4', linewidth=2.5, label='Median Outcome (Real Purchasing Power)')
     ax.fill_between(years, p10, p90, color='#1f77b4', alpha=0.15, label='80% Confidence Interval Boundaries')
-    ax.set_xlabel('Years in Retirement')
+    ax.set_xlabel('Investment Time in Years')
     ax.set_ylabel('Portfolio Value (Real Purchasing Power USD)')
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f"${x:,.0f}"))
     ax.grid(True, linestyle='--', alpha=0.4)
