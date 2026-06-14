@@ -12,6 +12,7 @@ st.set_page_config(page_title="Portfolio Optimizer", layout="wide")
 
 st.title("📊 Quantitative Portfolio Optimization Engine")
 st.write("A predictive risk simulator factoring inflation and asset covariance for client capstone models.")
+st.caption("⚠️ **Disclaimer:** This quantitative model relies strictly on historical data and does not account for future catalysts, geopolitical/macroeconomic shifts, changes in market trends, or other such factors.")
 
 # Create a clean sidebar for user interactive sliders
 st.sidebar.header("⚙️ Client Simulation Parameters")
