@@ -131,7 +131,7 @@ with chart_col:
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(years, p50, color='#1f77b4', linewidth=2.5, label='Median Outcome (Real Purchasing Power)')
     ax.fill_between(years, p10, p90, color='#1f77b4', alpha=0.15, label='80% Confidence Interval Boundaries')
-    ax.set_xlabel('Investment Time in Years')
+    ax.set_xlabel('Investment Time Horizon (Years)')
     ax.set_ylabel('Portfolio Value (Real Purchasing Power USD)')
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f"${x:,.0f}"))
     ax.grid(True, linestyle='--', alpha=0.4)
