@@ -41,7 +41,7 @@ if len(assets) < 2:
 # Cache the data download based on the tickers the user types
 @st.cache_data
 def load_market_data(assets_list):
-    return yf.download(assets_list, start="2021-01-01", end="2026-06-01", auto_adjust=False)['Adj Close']
+    return yf.download(assets_list, start="2018-01-01", end="2026-06-01", auto_adjust=False)['Adj Close']
 
 # Try downloading the dynamic tickers with error handling
 try:
