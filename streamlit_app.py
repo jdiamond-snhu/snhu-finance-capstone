@@ -85,6 +85,7 @@ optimal_weights = opts['x']
 portfolio_return, portfolio_volatility = portfolio_performance(optimal_weights, mean_returns, cov_matrix)
 
 # Run Monte Carlo Model based on slider numbers
+inflation_rate = inflation_rate / 100.0  #Adjustment to display whole numbers
 rrr = ((1 + portfolio_return) / (1 + inflation_rate)) - 1
 num_simulations = 5000  
 np.random.seed(42)
