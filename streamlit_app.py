@@ -60,7 +60,7 @@ rrr = ((1 + portfolio_return) / (1 + inflation_rate)) - 1
 num_simulations = 5000  # Kept at 5k for swift web calculation speed
 np.random.seed(42)
 sim_results = np.zeros((time_horizon + 1, num_simulations))
-sim_results = initial_investment
+sim_results[0] = initial_investment
 
 for t in range(1, time_horizon + 1):
     random_shocks = np.random.normal(0, 1, num_simulations)
