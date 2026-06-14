@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 # =============================================================================
 # WEB INTERFACE CONFIGURATION
 # =============================================================================
-st.set_page_index_config(page_title="Portfolio Optimizer", layout="wide")
+st.set_page_config(page_title="Portfolio Optimizer", layout="wide")
 
 st.title("📊 Quantitative Portfolio Optimization Engine")
 st.write("A predictive risk simulator factoring inflation and asset covariance for client capstone models.")
