@@ -120,7 +120,7 @@ median_max_drawdown = np.median(np.min(drawdowns, axis=0))
 # Layout Key Performance Metrics into 4 clean cards side-by-side
 m1, m2, m3, m4 = st.columns(4)
 with m1:
-    st.metric(label="Expected Year 30 Real Wealth", value=f"${p50[-1]:,.0f}")
+    st.metric(label="Projected Real Wealth", value=f"${p50[-1]:,.0f}")
 with m2:
     st.metric(label="Real Rate of Return (RRR)", value=f"{rrr*100:.1f}%")
 with m3:
