@@ -30,7 +30,7 @@ assets = ['SPY', 'BND', 'QQQ', 'GLD']
 # Cache the data download so the webpage loads blazing fast for users
 @st.cache_data
 def load_market_data():
-    return yf.download(assets, start="2021-01-01", end="2026-06-01")['Adj Close']
+    return yf.download(assets, start="2021-01-01", end="2026-06-01", auto_adjust=False)['Adj Close']
 
 data = load_market_data()
 returns = data.pct_change().dropna()
