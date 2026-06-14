@@ -16,7 +16,7 @@ st.write("A predictive risk simulator factoring inflation and asset covariance f
 # Create a clean sidebar for user interactive sliders
 st.sidebar.header("⚙️ Client Simulation Parameters")
 initial_investment = st.sidebar.number_input("Initial Investment ($)", value=100000, step=5000)
-time_horizon = st.sidebar.slider("Years in Retirement", min_value=5, max_value=50, value=30)
+time_horizon = st.sidebar.slider("Investment Time Horizon (Years)", min_value=5, max_value=50, value=30)
 inflation_rate = st.sidebar.slider("Annual Inflation Rate", min_value=0.0, max_value=0.15, value=0.03, step=0.01)
 
 # NEW: Dynamic Ticker Input Box in the Sidebar
