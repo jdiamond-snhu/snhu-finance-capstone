@@ -18,7 +18,7 @@ st.caption("⚠️ **Disclaimer:** This quantitative model relies strictly on hi
 st.sidebar.header("⚙️ Client Simulation Parameters")
 initial_investment = st.sidebar.number_input("Initial Investment ($)", value=100000, step=5000)
 time_horizon = st.sidebar.slider("Investment Time Horizon (Years)", min_value=5, max_value=50, value=30)
-inflation_rate = st.sidebar.slider("Annual Inflation Rate %", min_value=0.0, max_value=15.0, value=3.0, step=0.5)
+inflation_rate = st.sidebar.slider("Annual Inflation Rate %", min_value=0.0, max_value=15.0, value=2.5, step=0.5)
 # 2. THE EASTER EGG ALERTS: Add this block right below the slider
 if inflation_rate >= 13.0:
     st.error("🚨 **1979-1982 Reagan-Volcker Era Stress Test Active** 🚨\n\nSimulating extreme double-digit stagflation. Watch out for massive interest rate hikes!")
@@ -28,7 +28,7 @@ elif inflation_rate >= 5.0:
 # 3. Your existing backend math conversion line
 # NEW: Dynamic Ticker Input Box in the Sidebar
 st.sidebar.subheader("📈 Asset Selection")
-ticker_input = st.sidebar.text_input("Enter Tickers (comma separated)", value="SPY, BND, QQQ, GLD")
+ticker_input = st.sidebar.text_input("Enter Tickers (comma separated)", value="SPY,GLD")
 
 # Clean up the user input text into a neat Python list of uppercase tickers
 assets = [t.strip().upper() for t in ticker_input.split(",") if t.strip()]
