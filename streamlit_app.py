@@ -32,7 +32,7 @@ ticker_input = st.sidebar.text_input("Enter Tickers (comma separated)", value="S
 
 # Clean up the user input text into a neat Python list of uppercase tickers
 assets = [t.strip().upper() for t in ticker_input.split(",") if t.strip()]
-
+st.write("Adjust inflation rate to >5 to simulate Pandemic era") 
 # Add a visual divider line
 st.divider()
 
