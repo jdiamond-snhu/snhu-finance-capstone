@@ -16,7 +16,7 @@ st.caption("⚠️ **Disclaimer:** This quantitative model relies strictly on hi
 
 # Create a clean sidebar for user interactive sliders
 st.sidebar.header("⚙️ Client Simulation Parameters")
-initial_investment = st.sidebar.number_input("Initial Investment ($)", value=10000, step=5000)
+initial_investment = st.sidebar.number_input("Initial Investment ($)", value=100000, step=5000)
 time_horizon = st.sidebar.slider("Investment Time Horizon (Years)", min_value=5, max_value=50, value=10)
 inflation_rate = st.sidebar.slider("Annual Inflation Rate %", min_value=0.0, max_value=15.0, value=2.5, step=0.5)
 # 2. THE EASTER EGG ALERTS: Add this block right below the slider
