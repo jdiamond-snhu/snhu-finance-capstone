@@ -28,7 +28,7 @@ elif inflation_rate >= 5.0:
 # 3. Your existing backend math conversion line
 # NEW: Dynamic Ticker Input Box in the Sidebar
 st.sidebar.subheader("📈 Asset Selection")
-ticker_input = st.sidebar.text_input("Enter Tickers (comma separated)", value="SPY,GLD")
+ticker_input = st.sidebar.text_input("Enter Tickers (comma separated)")
 
 # Clean up the user input text into a neat Python list of uppercase tickers
 assets = [t.strip().upper() for t in ticker_input.split(",") if t.strip()]
