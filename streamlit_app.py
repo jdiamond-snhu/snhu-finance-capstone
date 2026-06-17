@@ -41,7 +41,7 @@ st.divider()
 # =============================================================================
 # Guard rail: Require at least 2 tickers to optimize a portfolio
 if len(assets) < 2:
-    st.warning("⚠️ Please enter at least 2 asset tickers to run an optimization calculation.")
+    st.success("💲 Please enter at least 2 asset tickers to run an optimization calculation.")
     st.stop()
 
 # Cache the data download based on the tickers the user types
