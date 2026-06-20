@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="Portfolio Optimizer", layout="wide")
 
 st.title("📊 Quantitative Portfolio Optimization Engine")
-st.write("A predictive risk simulator factoring inflation and asset covariance for client capstone models.")
+st.write("A predictive risk simulator factoring inflation and asset covariance for client capstone models. Designed by Jeff Diamond.")
 st.caption("⚠️ **Disclaimer:** This quantitative model relies strictly on historical data and does not account for future catalysts, macroeconomic shifts, changes in market trends, or any other such factors.")
 
 # Create a clean sidebar for user interactive sliders
